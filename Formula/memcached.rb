@@ -1,24 +1,18 @@
 class Memcached < Formula
   desc "High performance, distributed memory object caching system"
   homepage "https://memcached.org/"
-  url "https://www.memcached.org/files/memcached-1.5.22.tar.gz"
-  sha256 "c2b47e9d20575a2367087c229636ffc3fb699a6c3a7f3a22f44402f25f5f1f93"
+  url "https://www.memcached.org/files/memcached-1.6.1.tar.gz"
+  sha256 "881c30a222e019657e53b12230aaf629d7b5c080e4b74378c2eb5e78800d57d6"
   head "https://github.com/memcached/memcached.git"
 
   bottle do
     cellar :any
-    sha256 "c06d96884f09dc8ff4c1d6bed20366db116b4c3b837c7bd5d294d831848af454" => :catalina
-    sha256 "f041a91c262c14161be71a27e47b7b37d837e27fbb2f16ad38036ff3481fd14c" => :mojave
-    sha256 "2fee77cf1c8777a1c6c1eb64086bca30a6ae684b7ec4bfbb41f107c24de8b2c8" => :high_sierra
+    sha256 "91bcbb3c050038748abb8fc7f755d182502b69d6ed3ef2d810d4151b6cd2c5c1" => :catalina
+    sha256 "22dc3dea24670f7158cf9e8bcfb331b4c6fb8e2396e2c5354eab6db137380894" => :mojave
+    sha256 "b7103de48b5c2277ac831fd61695a065e91d68244e0e5f5d8bc8a3e9ebd70a8e" => :high_sierra
   end
 
   depends_on "libevent"
-
-  # fix for https://github.com/memcached/memcached/issues/598, included in next version
-  patch do
-    url "https://github.com/memcached/memcached/commit/7e3a2991.diff?full_index=1"
-    sha256 "063a2d91f863c4c6139ff5f0355bd880aca89b6da813515e0f0d11d9295189b4"
-  end
 
   def install
     system "./configure", "--prefix=#{prefix}", "--disable-coverage", "--enable-tls"
@@ -27,28 +21,29 @@ class Memcached < Formula
 
   plist_options :manual => "#{HOMEBREW_PREFIX}/opt/memcached/bin/memcached"
 
-  def plist; <<~EOS
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-    <dict>
-      <key>Label</key>
-      <string>#{plist_name}</string>
-      <key>KeepAlive</key>
-      <true/>
-      <key>ProgramArguments</key>
-      <array>
-        <string>#{opt_bin}/memcached</string>
-        <string>-l</string>
-        <string>localhost</string>
-      </array>
-      <key>RunAtLoad</key>
-      <true/>
-      <key>WorkingDirectory</key>
-      <string>#{HOMEBREW_PREFIX}</string>
-    </dict>
-    </plist>
-  EOS
+  def plist
+    <<~EOS
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+        <key>Label</key>
+        <string>#{plist_name}</string>
+        <key>KeepAlive</key>
+        <true/>
+        <key>ProgramArguments</key>
+        <array>
+          <string>#{opt_bin}/memcached</string>
+          <string>-l</string>
+          <string>localhost</string>
+        </array>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>WorkingDirectory</key>
+        <string>#{HOMEBREW_PREFIX}</string>
+      </dict>
+      </plist>
+    EOS
   end
 
   test do

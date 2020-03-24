@@ -5,15 +5,15 @@ class GitAnnex < Formula
 
   desc "Manage files with git without checking in file contents"
   homepage "https://git-annex.branchable.com/"
-  url "https://hackage.haskell.org/package/git-annex-7.20200219/git-annex-7.20200219.tar.gz"
-  sha256 "a8ac72fc4750e52a3419b69d23665e51e55fcf74f89eb6b47e395e891294fc5f"
+  url "https://hackage.haskell.org/package/git-annex-8.20200309/git-annex-8.20200309.tar.gz"
+  sha256 "e5868490fc710b0df4e1960a544dbd6cde55bb8f04624bc8c38ce50265004bfa"
   head "git://git-annex.branchable.com/"
 
   bottle do
     cellar :any
-    sha256 "84920d62612caae46817785314f3b7593904afd5818eaed6f35540339b0b07ee" => :catalina
-    sha256 "2df9cd0fadec10172238e03103b6fad92de34652a0f88ced7bba9c547f980af1" => :mojave
-    sha256 "54d2d67e39300ef280580ecc80da2c246bb20760843547dff369e66940882b9d" => :high_sierra
+    sha256 "bd6423ca21f1968cd265e0648b1479918458db59ae8e5a3d46d12b022404f403" => :catalina
+    sha256 "f347fe81223c99bbaf870fb2f09a91cdc6c5e476e1a053babb13538a26b003dc" => :mojave
+    sha256 "625de91db6cfc2b208f8ea42287fc3f07ed24e70e5fd26c653444f54cf5749df" => :high_sierra
   end
 
   depends_on "cabal-install" => :build
@@ -34,26 +34,27 @@ class GitAnnex < Formula
 
   plist_options :manual => "git annex assistant --autostart"
 
-  def plist; <<~EOS
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-      <dict>
-        <key>Label</key>
-        <string>#{plist_name}</string>
-        <key>RunAtLoad</key>
-        <true/>
-        <key>KeepAlive</key>
-        <false/>
-        <key>ProgramArguments</key>
-        <array>
-          <string>#{opt_bin}/git-annex</string>
-          <string>assistant</string>
-          <string>--autostart</string>
-        </array>
-      </dict>
-    </plist>
-  EOS
+  def plist
+    <<~EOS
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+        <dict>
+          <key>Label</key>
+          <string>#{plist_name}</string>
+          <key>RunAtLoad</key>
+          <true/>
+          <key>KeepAlive</key>
+          <false/>
+          <key>ProgramArguments</key>
+          <array>
+            <string>#{opt_bin}/git-annex</string>
+            <string>assistant</string>
+            <string>--autostart</string>
+          </array>
+        </dict>
+      </plist>
+    EOS
   end
 
   test do

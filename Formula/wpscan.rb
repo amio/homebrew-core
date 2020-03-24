@@ -1,15 +1,15 @@
 class Wpscan < Formula
   desc "Black box WordPress vulnerability scanner"
   homepage "https://wpscan.org"
-  url "https://github.com/wpscanteam/wpscan/archive/v3.7.8.tar.gz"
-  sha256 "4837ca3f8d5d42ca6aa8ccfa61fb3cb8262f050903e6b6d28f747709fea637a5"
+  url "https://github.com/wpscanteam/wpscan/archive/v3.7.11.tar.gz"
+  sha256 "f493e427d88b8f24d3f8187fead34ffe5b01ce67af6d42bc9c538a5c6781a33c"
   head "https://github.com/wpscanteam/wpscan.git"
 
   bottle do
     cellar :any
-    sha256 "fe2377aed071379d3a36477990d1bf619ff313ccbc32c8f6d0e9b64ec4fc1b03" => :catalina
-    sha256 "a3764be87280c508860215a052a5301530a7980b458a59528ae65f92e956ca25" => :mojave
-    sha256 "ed824c12c60c4936f108031a408e29e44b6d45624ed71f395b8ed3186803df2e" => :high_sierra
+    sha256 "b19367322d6891e804d1cc721ad63d0df4b2927505949fa84d0f83178bf6d9cc" => :catalina
+    sha256 "3a355cb31c324877da3e2c640a814a9188a00d46991373d4c9cf853186acd6ee" => :mojave
+    sha256 "b3f8f08c232218b9a0c656acfe696fa688e31a326454cd9b0daf4eb96d37afa0" => :high_sierra
   end
 
   depends_on "ruby"

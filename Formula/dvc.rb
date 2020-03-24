@@ -3,19 +3,20 @@ class Dvc < Formula
 
   desc "Git for data science projects"
   homepage "https://dvc.org"
-  url "https://github.com/iterative/dvc/archive/0.83.0.tar.gz"
-  sha256 "fae40d615a9e0095db2cea7e3c590af0ef2d6189cd48dee6d35b88acb4ed91dd"
+  url "https://github.com/iterative/dvc/archive/0.90.2.tar.gz"
+  sha256 "387c6436c92990b4dbcb0e8818877a1a519e1dea6bf82c7792e618a9da209ce8"
 
   bottle do
     cellar :any
-    sha256 "62e417342b6746466f436db2b86ce511dbe1508e21f04d4992bc12ddc9cadb00" => :catalina
-    sha256 "ca5571b68ea6b16b926cb8e449951c89087d95afd1c20df3dcf957e28e28ed3e" => :mojave
-    sha256 "407f6c739981c539303a5f0a686dba53babcae07b391a27a44a7a120496debb6" => :high_sierra
+    sha256 "3771c4d558ec5304167b642444da616c2024412638806140e34e16b878fe9c96" => :catalina
+    sha256 "66886fc79b1fcf86edec3c053eae216e7da103011bfae5d67da8f9a031f22144" => :mojave
+    sha256 "3ccbfca1dc420bb989d0e31c49e669154a522d33c30862b1315b921061052207" => :high_sierra
   end
 
   depends_on "pkg-config" => :build
   depends_on "apache-arrow"
   depends_on "openssl@1.1"
+  # `apache-arrow` currently depends on Python 3.7
   depends_on "python"
 
   def install

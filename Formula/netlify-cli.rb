@@ -3,18 +3,20 @@ require "language/node"
 class NetlifyCli < Formula
   desc "Netlify command-line tool"
   homepage "https://www.netlify.com/docs/cli"
-  url "https://registry.npmjs.org/netlify-cli/-/netlify-cli-2.36.0.tgz"
-  sha256 "414012b95ac2826129f3fb6904039261fa8d1286ed26a665e4b0a98654ea3acc"
+  url "https://registry.npmjs.org/netlify-cli/-/netlify-cli-2.40.0.tgz"
+  sha256 "c7b89b21e815da021e128633ef4b060e2373f59c53a5f14272982aa3efca6ea2"
   head "https://github.com/netlify/cli.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "61a53898049847aae4ead67ebadf2b1d634e21f67ec9a7ed19209a57e6298586" => :catalina
-    sha256 "c14d4e686ee7b487de790c922a8045d6ff1e9e63bd1d31071c127861706ebfb3" => :mojave
-    sha256 "b053738ccd192116165556d00b061b50a2f39d9e0de1c9e6c38b86f61d6808f3" => :high_sierra
+    sha256 "21545c11e6584886ac1e2ca573ae5ca411bc401d0ac3abd23e2e3ef14b7875ab" => :catalina
+    sha256 "d49597456e4c0fc3d2eb49f0aef10850fba8b9f302a270b2f669ea1cb51e6290" => :mojave
+    sha256 "bdac661004604f3eba5abad549a7559b19f304f8599ecd167fdbca920eaf3faa" => :high_sierra
   end
 
   depends_on "node"
+
+  uses_from_macos "expect" => :test
 
   def install
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)

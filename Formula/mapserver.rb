@@ -3,12 +3,13 @@ class Mapserver < Formula
   homepage "https://mapserver.org/"
   url "https://download.osgeo.org/mapserver/mapserver-7.4.3.tar.gz"
   sha256 "c8cc4dc994b61d7bc5767419da40d7af9e7566669d6800e4c2d4e11a91656f45"
+  revision 2
 
   bottle do
     cellar :any
-    sha256 "0d7cdf4bd7e9316d7e746d5e2e790dc1e87a6e4ceaf47fb0b698b228478780cc" => :catalina
-    sha256 "52d1c0ad676faf35615bb71d76e99e577dbebb92ad64f82e0567882f03b3a57c" => :mojave
-    sha256 "da521a03d022c4cf103fbd129409d288dd96d9c6fe74f90115e21348d4c783cd" => :high_sierra
+    sha256 "bdfe998c612593b3e05786252ef35f39c3425a15f44f8ba43d3c49062d60145b" => :catalina
+    sha256 "def75156d2f1109c2e06dc7528c311900c358eb00f3d3a4cbef81ac169d8425d" => :mojave
+    sha256 "d1b648c28c3a8af8b6d77ee8f0c9b0bc872e70a02e6bff0e19efa4bda8739134" => :high_sierra
   end
 
   depends_on "cmake" => :build
@@ -26,6 +27,8 @@ class Mapserver < Formula
   depends_on "proj"
   depends_on "protobuf-c"
   depends_on "python"
+
+  uses_from_macos "curl"
 
   def install
     ENV.cxx11

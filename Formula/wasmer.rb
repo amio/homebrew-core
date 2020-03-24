@@ -1,15 +1,15 @@
 class Wasmer < Formula
   desc "🚀 The Universal WebAssembly Runtime"
   homepage "https://wasmer.io"
-  url "https://github.com/wasmerio/wasmer/archive/0.14.0.tar.gz"
-  sha256 "ff1b4a07ca48105cfb2ff96662f24de304ebb657bb51429574702c91f3aaf9bd"
+  url "https://github.com/wasmerio/wasmer/archive/0.16.2.tar.gz"
+  sha256 "c2a5aa609fae558d07a24f268489d748093ae8e7c6f42699d1f7316ac3b44968"
   head "https://github.com/wasmerio/wasmer.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "47eb28f06a7fdae9b9f6a84a15b81788240342e620a0da8e4829298363c25903" => :catalina
-    sha256 "2f8e024547bb0beddfcc251919cdbb4d29fcaa584bad4a7f22c2d1d1df3fc1e1" => :mojave
-    sha256 "1acbe176f57022decc88bb031f64ae609d5d0de91a1775836a588da154f04725" => :high_sierra
+    sha256 "751b4b059036dbca254eef935bc03240e1fd559465a376a0cff8f5a41dcd3980" => :catalina
+    sha256 "725d2b857e0954b1e2fd8a01021847e168d5daec33cd76c32f90a0ae12fdf422" => :mojave
+    sha256 "42ea898c1ebd9c0ac58bf21117c05df6a4726123590444c19173a01586c80c63" => :high_sierra
   end
 
   depends_on "cmake" => :build
@@ -25,6 +25,7 @@ class Wasmer < Formula
   test do
     wasm = ["0061736d0100000001070160027f7f017f030201000707010373756d00000a09010700200020016a0b"].pack("H*")
     (testpath/"sum.wasm").write(wasm)
-    assert_equal "sum([I32(1), I32(2)]) returned [I32(3)]\n", shell_output("#{bin}/wasmer run #{testpath/"sum.wasm"} --invoke sum 1 2")
+    assert_equal "sum([I32(1), I32(2)]) returned [I32(3)]\n",
+      shell_output("#{bin}/wasmer run #{testpath/"sum.wasm"} --invoke sum 1 2")
   end
 end

@@ -1,14 +1,14 @@
 class Bitrise < Formula
   desc "Command-line automation tool"
   homepage "https://github.com/bitrise-io/bitrise"
-  url "https://github.com/bitrise-io/bitrise/archive/1.39.0.tar.gz"
-  sha256 "f8dc68ed0e80fde62cd002603c00904e37c647e1ec0c1df1ee19575018dc7131"
+  url "https://github.com/bitrise-io/bitrise/archive/1.40.0.tar.gz"
+  sha256 "bc99268a56909ed3adae7a13f423f1bfb429012f4fb3611e5cff06d09a5a3103"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "254256691400b0d9e4f813638a9617a498f7923b6f5c6a0c1a130d1130baf01a" => :catalina
-    sha256 "60bed9ed097c30fb17e60e1b33a3b71dcf8166a76c5db2cd2a93c78a2c0788ea" => :mojave
-    sha256 "6c48063043f4190fa470b85c87a2206d32aa848fcd488c8329319662f4cfba26" => :high_sierra
+    sha256 "d60aa304754cb648e641e8b0d4c7f23fcc2b1d00a15d8c0b6b1e153db9f841d7" => :catalina
+    sha256 "3f90af070eb6119662741a08d6f07227c16605079dad2c5067609cd47f765d8a" => :mojave
+    sha256 "7ba62ee69595d0d4412e7a46c79f84101ba020d6241562a9b4b99ca3cbbaf38e" => :high_sierra
   end
 
   depends_on "go" => :build

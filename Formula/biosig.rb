@@ -1,14 +1,15 @@
 class Biosig < Formula
   desc "Tools for biomedical signal processing and data conversion"
   homepage "https://biosig.sourceforge.io"
-  url "https://downloads.sourceforge.net/project/biosig/BioSig%20for%20C_C%2B%2B/src/biosig4c%2B%2B-1.9.5.src.tar.gz"
-  sha256 "20e72a5a07d1bf8baa649efe437b4d3ed99944f0e4dfc1fbe23bfbe4d9749ed5"
+  url "https://downloads.sourceforge.net/project/biosig/BioSig%20for%20C_C%2B%2B/src/biosig4c%2B%2B-2.0.1.src.tar.gz"
+  sha256 "b72ff4b67db5491dbe0b795d9328f454cd6ad3d4ac163ce99e12bf5002ff2791"
+  revision 1
 
   bottle do
     cellar :any
-    sha256 "59008e7ffe5f8049571860df04d2bc23389f7d7a206f0b3697c5469d8f189522" => :catalina
-    sha256 "9c1c605c039b453110165c83bff9eb159c554f0b224780c11f34e77d80626241" => :mojave
-    sha256 "40e3e75769bbbf7d0f09cf9a9d52e41d7a2fdb2c8b0c4217365b3d213ebdf06b" => :high_sierra
+    sha256 "657d638596e9b430fcd3b94e55c8a4f7fb510363df89951fa24037274512837f" => :catalina
+    sha256 "1872fde2c383eb64a607afe5110666b78cfdee48478a07c9a25fff3c82d3401f" => :mojave
+    sha256 "bb9a88cfbaed06fd3202330cfde11d144687800e99f6f9165f9cdde7b91c66fe" => :high_sierra
   end
 
   depends_on "gawk" => :build
@@ -30,7 +31,7 @@ class Biosig < Formula
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
-
+    ENV.deparallelize
     system "make"
     system "make", "install"
   end
@@ -38,7 +39,8 @@ class Biosig < Formula
   test do
     assert_match "usage: save2gdf [OPTIONS] SOURCE DEST", shell_output("#{bin}/save2gdf -h").strip
     assert_match "mV\t4274\t0x10b2\t0.001\tV", shell_output("#{bin}/physicalunits mV").strip
-    assert_match "biosig_fhir provides fhir binary template for biosignal data", shell_output("#{bin}/biosig_fhir 2>&1").strip
+    assert_match "biosig_fhir provides fhir binary template for biosignal data",
+      shell_output("#{bin}/biosig_fhir 2>&1").strip
     testpath.install resource("test")
     assert_match "NumberOfChannels", shell_output("#{bin}/save2gdf -json TEST_44x86_e1.GDF").strip
     assert_match "NumberOfChannels", shell_output("#{bin}/biosig_fhir TEST_44x86_e1.GDF").strip

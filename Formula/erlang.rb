@@ -2,15 +2,15 @@ class Erlang < Formula
   desc "Programming language for highly scalable real-time systems"
   homepage "https://www.erlang.org/"
   # Download tarball from GitHub; it is served faster than the official tarball.
-  url "https://github.com/erlang/otp/archive/OTP-22.2.7.tar.gz"
-  sha256 "29487837a2dd6e3184257cdec067cd3f5c0cd9517fbfb2ffc962589d46afbf75"
+  url "https://github.com/erlang/otp/archive/OTP-22.3.tar.gz"
+  sha256 "886e6dbe1e4823c7e8d9c9c1ba8315075a1a9f7717f5a1eaf3b98345ca6c798e"
   head "https://github.com/erlang/otp.git"
 
   bottle do
     cellar :any
-    sha256 "6c476e8a84d3b98e0d15d90f0fb2831fcf421d6ec4efb32f5afa2e79eb532270" => :catalina
-    sha256 "1e0edb24c4fdc5066f628c7c0f9bb9406177d54f25cbc4745060a66aa689b3a2" => :mojave
-    sha256 "6167d5b2ab42557bb6bb8712bf29bf683ae6929d87210fdbec033a4f1ec75bdd" => :high_sierra
+    sha256 "aeb18f87b3059b6256aba36957d3fb5c475f628c07aee49263003eccba4772f6" => :catalina
+    sha256 "86d816fcf632c71da3575edb78ef51e2160d39044a42203a011b0d193fe1a290" => :mojave
+    sha256 "5d10a00f5c377afd12975ad5c3e552fd1b94054bfa4168b137196488e4ab838a" => :high_sierra
   end
 
   depends_on "autoconf" => :build
@@ -68,12 +68,13 @@ class Erlang < Formula
     doc.install resource("html")
   end
 
-  def caveats; <<~EOS
-    Man pages can be found in:
-      #{opt_lib}/erlang/man
+  def caveats
+    <<~EOS
+      Man pages can be found in:
+        #{opt_lib}/erlang/man
 
-    Access them with `erl -man`, or add this directory to MANPATH.
-  EOS
+      Access them with `erl -man`, or add this directory to MANPATH.
+    EOS
   end
 
   test do

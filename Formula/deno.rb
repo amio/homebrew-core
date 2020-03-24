@@ -1,15 +1,14 @@
 class Deno < Formula
   desc "Command-line JavaScript / TypeScript engine"
   homepage "https://deno.land/"
-  url "https://github.com/denoland/deno/releases/download/v0.34.0/deno_src.tar.gz"
-  version "0.34.0"
-  sha256 "e6439e04b6df8db8d5192f98ee89c7d3ba9e966816fc7bf0d46cb52dc2e797aa"
+  url "https://github.com/denoland/deno/releases/download/v0.36.0/deno_src.tar.gz"
+  sha256 "23de3e13b87e40ac4cbd0d8f0362cf1afc50980f5226f381d3f44c67e603727e"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "1a4bd15ec2777e420d81c2cd68ddb1834a64a2ba37053a30412140b4fcae53be" => :catalina
-    sha256 "cb412afcc5f41f7d6ca8e72bdfd650e89a8fb0e8e08a213b37a429308c42ad5e" => :mojave
-    sha256 "d760ba1b15355725f9a3026dd23acb92bacc31b6aaf82efbfb06731806e52170" => :high_sierra
+    sha256 "4006e817ebad2c841a57690aadcdd1f0d18ad44257ec81656823f96d3d65046b" => :catalina
+    sha256 "e8b528fa2002fbc34385331c3891db8ccac0474c31139930d84f1d0d0c56e903" => :mojave
+    sha256 "d224a3b29b291ccea3fb0a6ed0fda61e0c45049b94f0b6fcd917fb140881ae4a" => :high_sierra
   end
 
   depends_on "llvm" => :build if DevelopmentTools.clang_build_version < 1100
@@ -17,6 +16,11 @@ class Deno < Formula
   depends_on "rust" => :build
 
   depends_on :xcode => ["10.0", :build] # required by v8 7.9+
+
+  # Does not work with Python 3
+  # https://github.com/denoland/deno/issues/2893
+  uses_from_macos "python@2"
+  uses_from_macos "xz"
 
   resource "gn" do
     url "https://gn.googlesource.com/gn.git",
@@ -56,9 +60,9 @@ class Deno < Formula
     (testpath/"hello.ts").write <<~EOS
       console.log("hello", "deno");
     EOS
-    hello = shell_output("#{bin}/deno run hello.ts")
-    assert_includes hello, "hello deno"
-    cat = shell_output("#{bin}/deno run --allow-read=#{testpath} https://deno.land/std/examples/cat.ts #{testpath}/hello.ts")
-    assert_includes cat, "console.log"
+    assert_match "hello deno", shell_output("#{bin}/deno run hello.ts")
+    assert_match "console.log",
+      shell_output("#{bin}/deno run --allow-read=#{testpath} https://deno.land/std/examples/cat.ts " \
+                   "#{testpath}/hello.ts")
   end
 end

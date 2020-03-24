@@ -2,16 +2,16 @@ class Consul < Formula
   desc "Tool for service discovery, monitoring and configuration"
   homepage "https://www.consul.io"
   url "https://github.com/hashicorp/consul.git",
-      :tag      => "v1.7.0",
-      :revision => "95fb95bfe643d7886c4fb2d9f3afe1977d31cfec"
+      :tag      => "v1.7.2",
+      :revision => "9ea1a204d832cfd4d8c5cba9df56876a526a4531"
   head "https://github.com/hashicorp/consul.git",
        :shallow => false
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "b7fc917839569100f1b90a76ec22768a3cbcf0fc418954c03846c987138a1612" => :catalina
-    sha256 "2f6dae165542afb1118541b9a021a16b66a6be39aafc6fa5374378e296dbf515" => :mojave
-    sha256 "6524af52fe7e00146a634543c56f288e1ec6ae022037622aad89412deed96ec3" => :high_sierra
+    sha256 "48d3dfc2bf8a652d9174272f441bcef15f6bef57c1a31e9825962fae52acd06d" => :catalina
+    sha256 "2c321bc2005e2bef8825fa86c95755d36957c38c9c1ee44936bc201d14028802" => :mojave
+    sha256 "6018791332232109b70c857748f49efb9d832c105f713d124a0f01e581668d5e" => :high_sierra
   end
 
   depends_on "go" => :build
@@ -35,37 +35,38 @@ class Consul < Formula
 
   plist_options :manual => "consul agent -dev -advertise 127.0.0.1"
 
-  def plist; <<~EOS
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-      <dict>
-        <key>KeepAlive</key>
+  def plist
+    <<~EOS
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
         <dict>
-          <key>SuccessfulExit</key>
-          <false/>
+          <key>KeepAlive</key>
+          <dict>
+            <key>SuccessfulExit</key>
+            <false/>
+          </dict>
+          <key>Label</key>
+          <string>#{plist_name}</string>
+          <key>ProgramArguments</key>
+          <array>
+            <string>#{opt_bin}/consul</string>
+            <string>agent</string>
+            <string>-dev</string>
+            <string>-advertise</string>
+            <string>127.0.0.1</string>
+          </array>
+          <key>RunAtLoad</key>
+          <true/>
+          <key>WorkingDirectory</key>
+          <string>#{var}</string>
+          <key>StandardErrorPath</key>
+          <string>#{var}/log/consul.log</string>
+          <key>StandardOutPath</key>
+          <string>#{var}/log/consul.log</string>
         </dict>
-        <key>Label</key>
-        <string>#{plist_name}</string>
-        <key>ProgramArguments</key>
-        <array>
-          <string>#{opt_bin}/consul</string>
-          <string>agent</string>
-          <string>-dev</string>
-          <string>-advertise</string>
-          <string>127.0.0.1</string>
-        </array>
-        <key>RunAtLoad</key>
-        <true/>
-        <key>WorkingDirectory</key>
-        <string>#{var}</string>
-        <key>StandardErrorPath</key>
-        <string>#{var}/log/consul.log</string>
-        <key>StandardOutPath</key>
-        <string>#{var}/log/consul.log</string>
-      </dict>
-    </plist>
-  EOS
+      </plist>
+    EOS
   end
 
   test do

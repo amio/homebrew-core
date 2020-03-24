@@ -1,13 +1,13 @@
 class Glib < Formula
   desc "Core application library for C"
   homepage "https://developer.gnome.org/glib/"
-  url "https://download.gnome.org/sources/glib/2.62/glib-2.62.5.tar.xz"
-  sha256 "b8d1cdafa46658b63d7512efbe2cd21bd36cd7be83140e44930c47b79f82452e"
+  url "https://download.gnome.org/sources/glib/2.64/glib-2.64.1.tar.xz"
+  sha256 "17967603bcb44b6dbaac47988d80c29a3d28519210b28157c2bd10997595bbc7"
 
   bottle do
-    sha256 "ffe825b5349fa644019af75ab82581fe312c689ab4c6add223ee119e1f35733d" => :catalina
-    sha256 "5c6ff19a133a3249fe5ae5996860eac5f1e7696a8d14429cfb3db6c0fa7c7635" => :mojave
-    sha256 "0dd0df3cb683714b7496537ccc8ea4f1f1b97301a36a58f2d9e8542922c389bc" => :high_sierra
+    sha256 "95aad8af50c0e84cc271b7843e0ef35a0c94fe96a1f1c721d5cb20674ccb7537" => :catalina
+    sha256 "e600b1c91a4760bd0f8170d9162a0b745add3ee5c20071877cd66d0a9a6f5c6d" => :mojave
+    sha256 "88c12b8d341eaf3106b6a2319c6564eade2d6182e3d642b6c9922a2727209183" => :high_sierra
   end
 
   depends_on "meson" => :build
@@ -23,7 +23,7 @@ class Glib < Formula
   # but needed to fix an assumption about the location of the d-bus machine
   # id file.
   patch do
-    url "https://raw.githubusercontent.com/Homebrew/formula-patches/6164294a7/glib/hardcoded-paths.diff"
+    url "https://raw.githubusercontent.com/Homebrew/formula-patches/6164294a75541c278f3863b111791376caa3ad26/glib/hardcoded-paths.diff"
     sha256 "a57fec9e85758896ff5ec1ad483050651b59b7b77e0217459ea650704b7d422b"
   end
 

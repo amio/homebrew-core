@@ -2,15 +2,14 @@ class Vim < Formula
   desc "Vi 'workalike' with many additional features"
   homepage "https://www.vim.org/"
   # vim should only be updated every 50 releases on multiples of 50
-  url "https://github.com/vim/vim/archive/v8.2.0250.tar.gz"
-  sha256 "e726378903b28f2531f01f49ddb7e579c40aab636998453bd98041686ba6540b"
-  revision 1
+  url "https://github.com/vim/vim/archive/v8.2.0400.tar.gz"
+  sha256 "4e89b4dc56312f7ea1fbff92aebe06068def12e6a6f55701ec69198d85a4da8a"
   head "https://github.com/vim/vim.git"
 
   bottle do
-    sha256 "9bb4fdc5b68110fc17ab05c30bacdd7a8648e63d7cef5411bf8b53ffc1d72d8e" => :catalina
-    sha256 "bf8e48a5fb5e299d24e46124009a7edb358c4b074675d663d9269bb289632af8" => :mojave
-    sha256 "c30b613ee22ad44854c0d929df8eeccd7d7e2a33865078c97ae94342b2922bda" => :high_sierra
+    sha256 "8540d076e37008fc730fe1ddd2d884f67d4d9bf93751794b08bde266e8114062" => :catalina
+    sha256 "6cda32b4c78b89b2ae9ab952defef6c096260f58b8826d1f543af45c85eb4d79" => :mojave
+    sha256 "fff1af3a38918c2e740c27e320e27e73a8cba55b4468d5b5289a7d7a94e257d0" => :high_sierra
   end
 
   depends_on "gettext"
@@ -18,6 +17,8 @@ class Vim < Formula
   depends_on "perl"
   depends_on "python"
   depends_on "ruby"
+
+  uses_from_macos "ncurses"
 
   conflicts_with "ex-vi",
     :because => "vim and ex-vi both install bin/ex and bin/view"
